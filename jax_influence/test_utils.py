@@ -72,14 +72,14 @@ def check_equal(a: PyTree, b: PyTree, err_msg: str = ''):
   if isinstance(b, dict):
     b = FrozenDict(b)
   assert_close = functools.partial(_assert_numpy_allclose, err_msg=err_msg)
-  assertions = jax.tree_multimap(assert_close, a, b)
+  assertions = jax.tree_map(assert_close, a, b)
 
   jax.tree_util.tree_all(assertions)
 
 
 def check_leaves_have_same_shape(a: PyTree, b: PyTree):
   """Tests that the leaves of a and b have same shape."""
-  assertions = jax.tree_multimap(_assert_shapes_equal, a, b)
+  assertions = jax.tree_map(_assert_shapes_equal, a, b)
 
   jax.tree_util.tree_all(assertions)
 
@@ -97,7 +97,7 @@ def check_close(a: PyTree,
     b = FrozenDict(b)
   assert_close = functools.partial(
       _assert_numpy_allclose, atol=atol, rtol=rtol, err_msg=err_msg)
-  assertions = jax.tree_multimap(assert_close, a, b)
+  assertions = jax.tree_map(assert_close, a, b)
 
   jax.tree_util.tree_all(assertions)
 

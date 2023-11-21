@@ -86,7 +86,7 @@ class FunctionFactoryTest(parameterized.TestCase):
 
   def concat_batches(self, batch0, batch1):
     """Concatenates two batches."""
-    return jax.tree_multimap(lambda x, y: jnp.concatenate([x[None], y[None]]),
+    return jax.tree_map(lambda x, y: jnp.concatenate([x[None], y[None]]),
                              batch0, batch1)
 
   def get_batch(self):

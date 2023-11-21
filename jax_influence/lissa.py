@@ -71,7 +71,7 @@ def lissa(matrix_fn: Callable[[PyTree], PyTree],
   curr_estimate = vector
   for i in range(recursion_depth):
     matrix_vector = matrix_fn(curr_estimate)
-    curr_estimate = jax.tree_util.tree_multimap(
+    curr_estimate = jax.tree_util.tree_map(
         lambda v, u, h: v + (1 - damping) * u - h / scale, vector,
         curr_estimate, matrix_vector)
     if log_progress:

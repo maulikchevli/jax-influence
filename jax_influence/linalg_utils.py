@@ -68,7 +68,7 @@ def add_scalar_multiple(pytree: PyTree, scalar: Scalar,
     pytree + scalar * pytree_to_add.
   """
   map_fn = lambda x, y: x + y * scalar
-  return jax.tree_multimap(map_fn, pytree, pytree_to_add)
+  return jax.tree_util.tree_map(map_fn, pytree, pytree_to_add)
 
 
 def inner_product(pytree_a: PyTree,
@@ -93,7 +93,7 @@ def inner_product(pytree_a: PyTree,
   else:
     sum_fn = np.sum
     add_fn = np.add
-  res = jax.tree_util.tree_multimap(lambda a, b: sum_fn(a * b), pytree_a,
+  res = jax.tree_util.tree_map(lambda a, b: sum_fn(a * b), pytree_a,
                                     pytree_b)
   return jax.tree_util.tree_reduce(add_fn, res)
 
@@ -220,7 +220,7 @@ def random_initialization(
   init_seeds = jax.random.split(seed, num=len(jax.tree_leaves(pytree)))
   init_seeds = jax.tree_unflatten(
       treedef=jax.tree_structure(pytree), leaves=init_seeds)
-  random_pytree = jax.tree_multimap(lambda x, y: sampler(y, x.shape), pytree,
+  random_pytree = jax.tree_util.tree_map(lambda x, y: sampler(y, x.shape), pytree,
                                     init_seeds)
 
   return random_pytree

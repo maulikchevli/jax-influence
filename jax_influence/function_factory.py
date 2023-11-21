@@ -212,7 +212,7 @@ def create_accumulator(fn: Fn,
 
       result = fn(batch=mbatch, **kwargs)
 
-      accum = jax.tree_multimap(jnp.add, accum, result)
+      accum = jax.tree_map(jnp.add, accum, result)
       return accum
 
     # Initialize accumulator.
