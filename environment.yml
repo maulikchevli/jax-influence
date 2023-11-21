@@ -15,7 +15,7 @@
 
 name: jax-influence
 dependencies:
-    - python=3.7
+    - python==3.10
     - absl-py
     - numpy
     - scipy
@@ -25,3 +25,6 @@ dependencies:
       - jaxlib
       - tensorflow
       - flax
+      - ml-collections
+      - tensorflow-datasets
+      - scikit-learn

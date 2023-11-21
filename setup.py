@@ -36,7 +36,7 @@ import setuptools
 REQUIRED_PACKAGES = ["absl-py", "numpy", "scipy", "jax", "jaxlib", "tensorflow",
                      "flax"]
 
-with open("README.md", "r") as fh:
+with open("package_description.md", "r") as fh:
   long_description = fh.read()
 
 setuptools.setup(
