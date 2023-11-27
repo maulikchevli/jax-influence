@@ -28,3 +28,4 @@ dependencies:
       - ml-collections
       - tensorflow-datasets
       - scikit-learn
+      - matplotlib
