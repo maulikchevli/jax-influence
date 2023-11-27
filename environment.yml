@@ -15,7 +15,7 @@
 
 name: jax-influence
 dependencies:
-    - python==3.10
+    - python==3.10.8
     - absl-py
     - numpy
     - scipy

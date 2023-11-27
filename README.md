@@ -7,29 +7,46 @@ Implementation of the algorithms in
 for efficient calculation of Influence Functions.
 
 ## Installation
+To install `jax_influence` as a pip module, just run `pip install .` after installing the requirements mentioned in [environment.yml](./environment.yml).
 
-### manual installation
+With conda, the following [installation](./install.sh) script can be used to install everything (for CPU) with `source install.sh`.
 
-Download the repo and set up a Python environment:
-
-```sh
-git clone https://github.com/google-research/jax-influence ~/jax-influence
-
-
-cd ~/jax-influence
-conda env create -f environment.yml
+### Conda installation script
+For CPU only installation:
+```bash
+conda create -n jax-influence python=3.10.8
 conda activate jax-influence
+conda install pip
+pip install jax jaxlib ipykernel
+conda env update -n jax-influence --file environment.yml
+pip install .
 ```
+Or just run the [installation](./install.sh) script as `source install.sh` 
 
-### pip installation
+<br>
 
+
+For GPU version, please install the appropriate Cuda toolkit and jax version from [here](https://docs.nvidia.com/cuda/cuda-quick-start-guide/index.html) and [here](https://jax.readthedocs.io/en/latest/installation.html) resp. The remaining steps remain similar to the above script. Here is an example that is compatible with Cuda11:
 ```sh
-pip install jax-influence
+conda create -n jax-influence python=3.10.8
+conda activate jax-influence
+conda install cuda -c nvidia/label/cuda-11.8.0
+conda install pip
+pip install --upgrade "jax[cuda11_pip]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+pip install ipykernel
+conda env update -n jax-influence --file environment.yml
+pip install .
 ```
 
-The pip installation will install all necessary prerequisite packages, however
-you might want to install the most appropriate version of `jax` and `jaxlib`
-in case you use GPUs/TPUs.
+### A reproducible conda environment
+[jax-influence.environment.yml](./jax-influence.environment.yml): Compatible only with CUDA 11
+```sh
+conda create -n jax-influence python=3.10.8
+conda activate jax-influence
+pip install --upgrade "jax[cuda11_pip]==0.4.20" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+conda env update -n jax-influence --file jax-influence.environment.yml
+pip install .
+```
 
 ## Documentation
 
